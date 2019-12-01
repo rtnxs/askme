@@ -9,16 +9,14 @@ class User < ApplicationRecord
 
   has_many :questions, dependent: :destroy
 
-  validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
-  validates :username, length: {maximum: 40}
-  validates :username, format: {with: USERNAME_REGEXP}
-  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates :email, :username, presence: true, uniqueness: true
+  validates :username, length: {maximum: 40}, format: {with: USERNAME_REGEXP}
+  validates :email, email: true
   validates :password, presence: true, on: :create
   validates_confirmation_of :password
 
   before_save :encrypt_password
-  before_save :username_downcase!
+  before_validation :username_downcase!
 
   def encrypt_password
     if password.present?
