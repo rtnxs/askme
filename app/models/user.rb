@@ -4,29 +4,23 @@ class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
   USERNAME_REGEXP = /\A\w+\z/
+  EMAIL_REGEXP = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   attr_accessor :password
 
   has_many :questions, dependent: :destroy
 
   validates :email, :username, presence: true, uniqueness: true
-  validates :username, length: {maximum: 40}, format: {with: USERNAME_REGEXP}
-  validates :email, email: true
+  validates :username, length: { maximum: 40 }, format: { with: USERNAME_REGEXP }
+  validates :email, format: { with: EMAIL_REGEXP }
   validates :password, presence: true, on: :create
   validates_confirmation_of :password
 
   before_save :encrypt_password
   before_validation :username_downcase!
 
-  def encrypt_password
-    if password.present?
-      self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
-      self.password_hash = User.hash_to_string(
-          OpenSSL::PKCS5.pbkdf2_hmac(
-              password, password_salt, ITERATIONS, DIGEST.length, DIGEST
-          )
-      )
-    end
+  def username_downcase!
+    self.username.downcase! unless username.nil?
   end
 
   def self.hash_to_string(password_hash)
@@ -45,8 +39,15 @@ class User < ApplicationRecord
     nil
   end
 
-  def username_downcase!
-    self.username.downcase!
+  def encrypt_password
+    if password.present?
+      self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
+      self.password_hash = User.hash_to_string(
+          OpenSSL::PKCS5.pbkdf2_hmac(
+              password, password_salt, ITERATIONS, DIGEST.length, DIGEST
+          )
+      )
+    end
   end
 end
 
