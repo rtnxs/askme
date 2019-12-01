@@ -1,24 +1,9 @@
-# README
+Клон популярно молодёжного сайт [ask.fm](https://ask.fm)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
+#### Среда разработки
+* ruby 2.6.3
+* rails 6.0.1
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+---
+###### Домашнее задание для школы программирования http://goodprogrammer.ru
