@@ -18,6 +18,7 @@ class User < ApplicationRecord
   validates_confirmation_of :password
 
   before_save :encrypt_password
+  before_save :username_downcase!
 
   def encrypt_password
     if password.present?
@@ -44,6 +45,10 @@ class User < ApplicationRecord
     )
     return user if user.password_hash == hashed_password
     nil
+  end
+
+  def username_downcase!
+    self.username.downcase!
   end
 end
 
