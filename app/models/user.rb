@@ -17,11 +17,7 @@ class User < ApplicationRecord
   validates_confirmation_of :password
 
   before_save :encrypt_password
-  before_validation :username_downcase!, on: :create
-
-  def username_downcase!
-    self.username.downcase! unless username.nil?
-  end
+  before_validation :downcase!, on: [ :create, :update ]
 
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
@@ -48,6 +44,13 @@ class User < ApplicationRecord
           )
       )
     end
+  end
+
+  private
+
+  def downcase!
+    self.username&.downcase!
+    self.email&.downcase!
   end
 end
 
