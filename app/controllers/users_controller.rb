@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # Болванка пользователя
     @user = User.new(
         name: 'Енотио',
         username: 'Ракета',
@@ -33,5 +32,8 @@ class UsersController < ApplicationController
     ]
 
     @new_question = Question.new
+
+    @answers_count = @questions.select {|question| question.answer.present?}.count
+    @unanswered_count = @questions.count - @answers_count
   end
 end

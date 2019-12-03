@@ -38,8 +38,18 @@
 <div class="column-3-4">
   <div class="user-questions buffer-both">
     <div class="text-center">
-      <%= @questions.count %>
-      <%= "#{inclinator(@questions.count, 'вопрос', 'вопроса', 'вопросов')}" %>
+      <div class="column-1-3">
+        <%= @questions.count %>
+        <%= "#{inclinator(@questions.count, 'вопрос', 'вопроса', 'вопросов')}" %>
+      </div>
+      <div class="column-1-3">
+        <%= @answers_count %>
+        <%= "#{inclinator(@answers_count, 'вопрос', 'вопроса', 'вопросов')} с ответом" %>
+      </div>
+      <div class="column-1-3">
+        <%= @unanswered_count %>
+        <%= "#{inclinator(@unanswered_count, 'вопрос', 'вопроса', 'вопросов')} без ответа" %>
+      </div>
     </div>
     <div class="questions-list">
       <% @questions.each do |question| %>
