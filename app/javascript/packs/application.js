@@ -15,3 +15,10 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+$(function(){
+    $('#ask-button').click(function(){
+        $('#ask-form').slideToggle(300);
+        return false;
+    });
+});
