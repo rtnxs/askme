@@ -3,12 +3,11 @@ class UsersController < ApplicationController
     @users = [
         User.new(
             id: 1,
-            name: 'Vadim',
-            username: 'installero',
-            avatar_url: 'https://secure.gravatar.com/avatar/' \
-          '71269686e0f757ddb4f73614f43ae445?s=100'
+            name: 'Енотио',
+            username: 'Ракета',
+            avatar_url: 'http://photoshablon.ru/_ph/46/139276644.jpg?1510557114'
         ),
-        User.new(id: 2, name: 'Misha', username: 'aristofun')
+        User.new(id: 2, name: 'Пух', username: 'Кругломягко')
     ]
   end
 
@@ -21,17 +20,16 @@ class UsersController < ApplicationController
   def show
     # Болванка пользователя
     @user = User.new(
-        name: 'Vadim',
-        username: 'installero',
-        avatar_url: 'https://secure.gravatar.com/avatar/' \
-        '71269686e0f757ddb4f73614f43ae445?s=100'
+        name: 'Енотио',
+        username: 'Ракета',
+        avatar_url: 'http://photoshablon.ru/_ph/46/139276644.jpg?1510557114'
     )
 
     @questions = [
-        Question.new(text: 'Как дела?', created_at: Date.parse('27.03.2016')),
-        Question.new(
-            text: 'В чем смысл жизни?', created_at: Date.parse('27.03.2016')
-        )
+        Question.new(text: 'Как дела?', created_at: Date.parse('07.09.2019')),
+        Question.new(text: 'Чо по чём?', created_at: Date.parse('07.09.2019')),
+        Question.new(text: 'А семки е?', created_at: Date.parse('10.10.2019'))
+
     ]
 
     @new_question = Question.new
