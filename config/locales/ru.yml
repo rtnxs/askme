@@ -4,3 +4,4 @@ ru:
     one: '%{count} вопрос'
     few: '%{count} вопроса'
     many: '%{count} вопросов'
+    other: '%{count} вопросов'
