@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   root 'users#index'
 
-  resources :users, except: [:destroy]
+  resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :questions, except: [:show, :new, :index]
 
