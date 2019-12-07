@@ -1,4 +1,4 @@
-<div class="user-header text-center"  style="background: <%= @user.bgcolor %>">
+<div class="user-header text-center" style="background: <%= @user.bgcolor %>">
   <h1 class="title-medium">
     <%= @user.name %>
   </h1>
@@ -56,10 +56,8 @@
 
 <div class="column-3-4">
   <div class="user-questions buffer-both">
-    <div class="questions-list">
-      <% @questions.each do |question| %>
-        <%= render partial: 'questions/question', object: question %>
-      <% end %>
-    </div>
+    <% @questions.each do |question| %>
+      <%= render partial: 'questions/question', object: question %>
+    <% end %>
   </div>
 </div>
