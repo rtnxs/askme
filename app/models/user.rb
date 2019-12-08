@@ -16,7 +16,7 @@ class User < ApplicationRecord
   validates :email, format: { with: EMAIL_REGEXP }
   validates :password, presence: true, on: :create
   validates_confirmation_of :password
-  validates :bgcolor, format: { with: BGCOLOR_REGEXP }
+  validates :bgcolor, format: { with: BGCOLOR_REGEXP }, on: :update
 
   before_save :encrypt_password
   before_validation :downcase!, on: [ :create, :update ]
