@@ -7,8 +7,8 @@ class Question < ApplicationRecord
   validates :text, presence: true, length: {maximum: 255}
 
   before_save do
-    words = self.text.scan(/#\w+/)
-    words << self.answer.scan(/#\w+/) if self.answer
+    words = self.text.scan(/#[[:word:]]+/)
+    words << self.answer.scan(/#[[:word:]]+/) if self.answer
     create_hashtags(words.flatten)
   end
 
