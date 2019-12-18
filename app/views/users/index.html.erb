@@ -11,3 +11,11 @@
     </div>
   <% end %>
 </div>
+
+<div class="content-wrapper buffer-both text-center">
+  <div class="text-medium">
+    <% Hashtag.all.each do |hashtag| %>
+      <%= link_to "##{hashtag.name}", hashtag_path(hashtag.name) %>
+    <% end %>
+  </div>
+</div>

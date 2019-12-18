@@ -1,0 +1,13 @@
+<div class="content-wrapper buffer-both">
+  <div class="text-lead">
+    Страница со списком где встречается этот хэштег
+  </div>
+
+  <div class="user-questions buffer-both">
+    <div class="questions-list">
+      <% @questions.each do |question| %>
+        <%= render partial: 'questions/question', object: question %>
+      <% end %>
+    </div>
+  </div>
+</div>
