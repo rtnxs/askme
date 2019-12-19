@@ -13,6 +13,8 @@ class Question < ApplicationRecord
   end
 
   def create_hashtags(tags)
+    self.hashtags.all.destroy_all
+
     tags.map do |hastag|
       tag = Hashtag.find_or_create_by(name: hastag.downcase.delete('#'))
       self.hashtags << tag
