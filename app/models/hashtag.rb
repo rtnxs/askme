@@ -1,3 +1,4 @@
 class Hashtag < ApplicationRecord
-  has_and_belongs_to_many :questions
+  has_many :hashtags_questions
+  has_many :questions, :through => :hashtags_questions
 end

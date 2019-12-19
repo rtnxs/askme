@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_12_18_144624) do
   create_table "hashtags_questions", id: false, force: :cascade do |t|
     t.integer "question_id"
     t.integer "hashtag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["hashtag_id"], name: "index_hashtags_questions_on_hashtag_id"
     t.index ["question_id"], name: "index_hashtags_questions_on_question_id"
   end
