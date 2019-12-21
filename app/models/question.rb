@@ -1,6 +1,4 @@
 class Question < ApplicationRecord
-  HASHTAG_REGEXP = /#[[:word:]]+/i
-
   belongs_to :user
   belongs_to :author, class_name: 'User', optional: true
 

@@ -1,0 +1,1 @@
+HASHTAG_REGEXP = /#[[:word:]]+/i
