@@ -7,23 +7,20 @@ class Question < ApplicationRecord
 
   validates :text, presence: true, length: {maximum: 255}
 
-  after_save do
-    tags = ("#{text} #{answer}").downcase.scan(HASHTAG_REGEXP).uniq
-    #byebug
-    create_hashtags(tags)
-  end
+  after_save :create_hashtags
 
-  after_commit do
-    #byebug
-    Hashtag.includes(:questions).where(questions: {id: nil}).destroy_all
-  end
+  after_commit :destroy_unused_hashtags, on: [:update, :destroy]
 
-  def create_hashtags(tags)
+  def create_hashtags
     self.hashtags.destroy_all
 
-    tags.map do |hashtag|
+    "#{text} #{answer}".downcase.scan(HASHTAG_REGEXP).uniq.each do |hashtag|
       tag = Hashtag.find_or_create_by(name: hashtag.delete('#'))
       self.hashtags << tag
     end
+  end
+
+  def destroy_unused_hashtags
+    Hashtag.includes(:questions).where(questions: {id: nil}).destroy_all
   end
 end
