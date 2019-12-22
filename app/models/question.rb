@@ -3,7 +3,7 @@ class Question < ApplicationRecord
   belongs_to :author, class_name: 'User', optional: true
 
   has_many :hashtags_questions
-  has_many :hashtags, :through => :hashtags_questions, dependent: :destroy
+  has_many :hashtags, through: :hashtags_questions, dependent: :destroy
 
   validates :text, presence: true, length: {maximum: 255}
 
@@ -12,11 +12,10 @@ class Question < ApplicationRecord
   after_commit :destroy_unused_hashtags, on: [:update, :destroy]
 
   def create_hashtags
-    self.hashtags.destroy_all
+    self.hashtags.clear
 
     "#{text} #{answer}".downcase.scan(HASHTAG_REGEXP).uniq.each do |hashtag|
-      tag = Hashtag.find_or_create_by(name: hashtag.delete('#'))
-      self.hashtags << tag
+      self.hashtags << Hashtag.find_or_create_by(name: hashtag.delete('#'))
     end
   end
 

@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if current_user.delete
+    if current_user.destroy
       redirect_to root_url, notice: 'Аккаунт удалён'
     end
   end
